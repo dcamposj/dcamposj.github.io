@@ -1,11 +1,69 @@
-button {
-  height: 40px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #eee;
-  border: 0.5px solid #363945;
-  width: 100%;
-  box-sizing: border-box;
-}
+:root {
+            font-family: 'Inter', sans-serif;
+        }
+
+        #preview-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -10; /* Detrás de todo el contenido */
+            background-color: #1f2937; /* Gris oscuro para el fondo base */
+            overflow: hidden;
+            opacity: 1; /* Siempre visible ahora que es una galería de diapositivas */
+        }
+
+        #parallax-image {
+            width: 110%; 
+            height: 110%;
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            background-size: cover;
+            background-position: center center;
+            opacity: 1; 
+            transition: background-image 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.1s linear;
+        }
+
+        .content-card {
+            background-color: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Estilo para los botones de navegación y acción */
+        .nav-button, .action-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: transform 0.2s ease-out, background-color 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-button:hover:not(:disabled), .action-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .nav-button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Adaptación para pantallas pequeñas (móviles) */
+        @media (max-width: 640px) {
+            .nav-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem; /* text-sm */
+            }
+            .content-card {
+                padding: 1.5rem;
+            }
+            .text-5xl {
+                font-size: 2.25rem; /* sm:text-4xl */
+            }
+            .text-3xl {
+                font-size: 1.75rem; /* sm:text-2xl */
+            }
+        }
