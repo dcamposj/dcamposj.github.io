@@ -51,3 +51,12 @@ updateGallery(currentIndex);
 if (window.lucide && typeof window.lucide.createIcons === 'function') {
   window.lucide.createIcons({ attrs: { width: 20, height: 20 } });
 }
+
+const emailBtn = document.getElementById('email-button');
+
+emailBtn.addEventListener('click', () => {
+    const email = "diegocj92@gmail.com";
+    const subject = "Contact";
+    const body = "Message";
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+});
