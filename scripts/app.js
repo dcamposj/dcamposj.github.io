@@ -7,7 +7,8 @@ const urls = [
   {name: "clock255", url: "https://codepen.io/diego_caji/full/XWGEGPJ", image: "./resources/clock255.png"},
   {name: "calculator", url: "https://codepen.io/diego_caji/full/BabBRPd", image: "./resources/calculadora.png"},
   {name: "drumkit", url: "https://codepen.io/diego_caji/full/eYxwLBy", image: "./resources/drumkit.png"},
-  {name: "markup", url: "https://codepen.io/diego_caji/full/mdvgBVX", image: "./resources/markuptranslator.png"}
+  {name: "markup", url: "https://codepen.io/diego_caji/full/mdvgBVX", image: "./resources/markuptranslator.png"},
+  {name: "imgview", url: "https://codepen.io/diego_caji/full/ZYOojVK", image: "./resources/imgview.png"}
 ];
 
 let currentIndex = 0;
