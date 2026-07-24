@@ -13,7 +13,7 @@ const urls = [
 
 let currentIndex = 0;
 let autoPlayInterval;
-const autoPlayDelay = 5000; // 5 seconds
+const autoPlayDelay = 3500;
 
 const title = document.getElementById('project-title');
 const image = document.getElementById('project-image');
