@@ -10,53 +10,65 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body class="bg-gray-900 text-white min-h-screen">
-    <h1 class="text-3xl mt-0">Portfolio</h1>
-    <h1 class="text-3xl font-bold mt-0">Diego Francisco Campos Jimenez</h1>
-    <h3 class="text-xl mt-0">Front End Developer & UI/UX Designer</h2>
-        <button id="email-button"
-            class="action-button bg-blue-500 text-white hover:bg-blue-600 w-[160px] h-[50px] flex items-center justify-center rounded-lg">
-            <i data-lucide="mail" class="icon-mail" aria-hidden="true"></i>
-            <span class="text-l font-bold ml-2">Contact Me</span>
-        </button>
-        <div class="container mx-auto px-4 py-6 md:py-10 flex flex-col justify-start">
-            <div class="max-w-5xl mx-auto w-full">
+<body class="bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <!-- Hero Section -->
+        <header class="text-center mb-12 animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2 py-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent animate-slide-up">
+                Diego Francisco Campos Jimenez
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-6 animate-slide-up" style="animation-delay: 0.2s">
+                Front End Developer & UI/UX Designer
+            </p>
+            <button id="email-button"
+                class="action-button bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 w-[160px] h-[50px] flex items-center justify-center rounded-lg animate-slide-up"
+                style="animation-delay: 0.4s">
+                <i data-lucide="mail" class="icon-mail" aria-hidden="true"></i>
+                <span class="text-l font-bold ml-2">Contact Me</span>
+            </button>
+        </header>
 
-                <div class="bg-white rounded-xl shadow-xl overflow-hidden p-6 md:p-10 gallery-card relative">
-                    <div id="project-display" class="text-center">
-                        <h2 id="project-title" class="text-3xl font-bold mb-6 text-gray-800 uppercase tracking-wider">
-                            Cargando...
-                        </h2>
+        <!-- Projects Section -->
+        <section class="max-w-5xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 animate-slide-up" style="animation-delay: 0.6s">
+                My Projects
+            </h2>
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden p-6 md:p-10 gallery-card relative animate-fade-in" style="animation-delay: 0.8s">
+                <div id="project-display" class="text-center">
+                    <h2 id="project-title" class="text-3xl md:text-4xl font-bold mb-6 text-white uppercase tracking-wider animate-title-change">
+                        Cargando...
+                    </h2>
 
-                        <a id="project-link" href="#" target="_blank"
-                            class="block rounded-lg overflow-hidden group relative h-[45vh] md:h-[60vh] w-full">
+                    <a id="project-link" href="#" target="_blank"
+                       class="block rounded-xl overflow-hidden group relative h-[45vh] md:h-[60vh] w-full shadow-lg">
+                        
+                        <img id="project-image" src="" alt="Preview"
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 animate-image-fade">
 
-                            <img id="project-image" src="" alt="Preview"
-                                class="hover:scale-[1.02] transition-transform duration-300">
-
-                            <div
-                                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                <span class="text-white text-xl font-bold bg-blue-600 px-6 py-2 rounded-full shadow-lg">
-                                    Go to Project
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="flex justify-between mt-8">
-                        <button id="prev-btn"
-                            class="nav-button px-6 py-3 rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition font-medium">
-                            &larr; <span id="prev-text" class="hidden sm:inline">Previous</span>
-                        </button>
-                        <button id="next-btn"
-                            class="nav-button px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition font-medium">
-                            <span id="next-text" class="hidden sm:inline">Next</span> &rarr;
-                        </button>
-                    </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                            <span class="text-white text-xl font-bold bg-blue-600 px-8 py-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                Go to Project
+                            </span>
+                        </div>
+                    </a>
                 </div>
-                <script src="scripts/app.js"></script>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between items-center mt-8">
+                    <button id="prev-btn" class="nav-button px-6 py-3 rounded-lg bg-white/10 text-white hover:bg-white/20 transition font-medium border border-white/20">
+                        &larr; <span id="prev-text" class="hidden sm:inline">Previous</span>
+                    </button>
+                    <div id="project-indicators" class="flex gap-2">
+                        <!-- Indicators will be generated by JS -->
+                    </div>
+                    <button id="next-btn" class="nav-button px-6 py-3 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition font-medium">
+                        <span id="next-text" class="hidden sm:inline">Next</span> &rarr;
+                    </button>
+                </div>
             </div>
-        </div>
+        </section>
+    </div>
+    <script src="scripts/app.js"></script>
 </body>
 
 </html>

@@ -12,12 +12,61 @@ const urls = [
 ];
 
 let currentIndex = 0;
+let autoPlayInterval;
+const autoPlayDelay = 5000; // 5 seconds
 
 const title = document.getElementById('project-title');
 const image = document.getElementById('project-image');
 const link = document.getElementById('project-link');
 const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
+const indicatorsContainer = document.getElementById('project-indicators');
+
+// Create project indicators
+function createIndicators() {
+    indicatorsContainer.innerHTML = '';
+    urls.forEach((_, index) => {
+        const indicator = document.createElement('div');
+        indicator.className = 'project-indicator';
+        indicator.addEventListener('click', () => {
+            goToProject(index);
+        });
+        indicatorsContainer.appendChild(indicator);
+    });
+    updateIndicators();
+}
+
+// Update indicators to show active project
+function updateIndicators() {
+    const indicators = indicatorsContainer.querySelectorAll('.project-indicator');
+    indicators.forEach((indicator, index) => {
+        if (index === currentIndex) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+}
+
+// Trigger animation on title and image
+function triggerAnimations() {
+    title.style.animation = 'none';
+    image.style.animation = 'none';
+    
+    // Force reflow
+    void title.offsetWidth;
+    void image.offsetWidth;
+    
+    title.style.animation = 'titleChange 0.4s ease-out';
+    image.style.animation = 'imageFade 0.5s ease-out';
+}
+
+// Go to specific project
+function goToProject(index) {
+    currentIndex = index;
+    updateGallery(currentIndex);
+    resetAutoPlay();
+}
 
 // Función para actualizar la interfaz
 function updateGallery(index) {
@@ -26,6 +75,32 @@ function updateGallery(index) {
     image.src = project.image;
     image.alt = `Preview de ${project.name}`;
     link.href = project.url;
+    updateIndicators();
+    triggerAnimations();
+}
+
+// Auto-play functionality
+function startAutoPlay() {
+    stopAutoPlay(); // Clear any existing interval first
+    autoPlayInterval = setInterval(() => {
+        currentIndex++;
+        if (currentIndex >= urls.length) {
+            currentIndex = 0;
+        }
+        updateGallery(currentIndex);
+    }, autoPlayDelay);
+}
+
+function stopAutoPlay() {
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+    }
+}
+
+function resetAutoPlay() {
+    stopAutoPlay();
+    startAutoPlay();
 }
 
 // Eventos de los botones
@@ -35,6 +110,7 @@ nextBtn.addEventListener('click', () => {
         currentIndex = 0; // Vuelve al inicio (Loop)
     }
     updateGallery(currentIndex);
+    resetAutoPlay();
 });
 
 prevBtn.addEventListener('click', () => {
@@ -43,10 +119,17 @@ prevBtn.addEventListener('click', () => {
         currentIndex = urls.length - 1; // Vuelve al final
     }
     updateGallery(currentIndex);
+    resetAutoPlay();
 });
 
+// Pause auto-play on hover over the gallery card
+document.querySelector('.gallery-card').addEventListener('mouseenter', stopAutoPlay);
+document.querySelector('.gallery-card').addEventListener('mouseleave', startAutoPlay);
+
 // Inicializar la galería al cargar la página
+createIndicators();
 updateGallery(currentIndex);
+startAutoPlay();
 
 // Render lucide icons (replace elements with inline SVGs)
 if (window.lucide && typeof window.lucide.createIcons === 'function') {
