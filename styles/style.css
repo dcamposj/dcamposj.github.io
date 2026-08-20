@@ -21,7 +21,6 @@ body {
     animation: gradient 4s ease infinite;
 }
 
-/* Project Card Styling */
 .project-card {
     position: relative;
     border-radius: 16px;
@@ -53,7 +52,6 @@ body {
     box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2), 0 0 60px rgba(168, 85, 247, 0.1);
 }
 
-/* Image Container */
 .project-image-container {
     position: relative;
     width: 100%;
@@ -74,7 +72,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Overlay */
 .project-overlay {
     position: absolute;
     inset: 0;
@@ -92,7 +89,6 @@ body {
     opacity: 1;
 }
 
-/* Project Title */
 .project-title {
     position: absolute;
     bottom: 0;
@@ -119,7 +115,6 @@ body {
     margin: 0;
 }
 
-/* View Button */
 .view-button {
     display: inline-flex;
     align-items: center;
@@ -147,7 +142,6 @@ body {
     box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
 }
 
-/* Glow Effect */
 .project-card::after {
     content: '';
     position: absolute;
@@ -164,7 +158,6 @@ body {
     opacity: 0.5;
 }
 
-/* Responsive Grid */
 @media (max-width: 768px) {
     .project-image-container {
         aspect-ratio: 16 / 12;
@@ -175,7 +168,6 @@ body {
     }
 }
 
-/* Loading State */
 .project-card.loading .project-image {
     opacity: 0.5;
     filter: blur(4px);
