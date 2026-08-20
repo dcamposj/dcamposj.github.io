@@ -7,130 +7,73 @@ const urls = [
   {name: "clock255", url: "https://codepen.io/diego_caji/full/XWGEGPJ", image: "./resources/clock255.png"},
   {name: "calculator", url: "https://codepen.io/diego_caji/full/BabBRPd", image: "./resources/calculadora.png"},
   {name: "drumkit", url: "https://codepen.io/diego_caji/full/eYxwLBy", image: "./resources/drumkit.png"},
-  {name: "markup", url: "https://codepen.io/diego_caji/full/mdvgBVX", image: "./resources/markuptranslator.png"}
+  {name: "markup", url: "https://codepen.io/diego_caji/full/mdvgBVX", image: "./resources/markuptranslator.png"},
+  /*{name: "imgview", url: "https://codepen.io/diego_caji/full/ZYOojVK", image: "./resources/imgview.png"}*/
 ];
 
-let currentIndex = 0;
-let autoPlayInterval;
-const autoPlayDelay = 5000; // 5 seconds
+const projectsGrid = document.getElementById('projects-grid');
 
-const title = document.getElementById('project-title');
-const image = document.getElementById('project-image');
-const link = document.getElementById('project-link');
-const nextBtn = document.getElementById('next-btn');
-const prevBtn = document.getElementById('prev-btn');
-const indicatorsContainer = document.getElementById('project-indicators');
-
-// Create project indicators
-function createIndicators() {
-    indicatorsContainer.innerHTML = '';
-    urls.forEach((_, index) => {
-        const indicator = document.createElement('div');
-        indicator.className = 'project-indicator';
-        indicator.addEventListener('click', () => {
-            goToProject(index);
-        });
-        indicatorsContainer.appendChild(indicator);
-    });
-    updateIndicators();
-}
-
-// Update indicators to show active project
-function updateIndicators() {
-    const indicators = indicatorsContainer.querySelectorAll('.project-indicator');
-    indicators.forEach((indicator, index) => {
-        if (index === currentIndex) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
-
-// Trigger animation on title and image
-function triggerAnimations() {
-    title.style.animation = 'none';
-    image.style.animation = 'none';
+// Create project card HTML
+function createProjectCard(project) {
+    const card = document.createElement('a');
+    card.href = project.url;
+    card.target = '_blank';
+    card.className = 'project-card loading';
     
-    // Force reflow
-    void title.offsetWidth;
-    void image.offsetWidth;
+    card.innerHTML = `
+        <div class="project-image-container">
+            <img 
+                src="${project.image}" 
+                alt="${project.name}" 
+                class="project-image"
+                onload="this.closest('.project-card').classList.remove('loading')"
+                onerror="this.closest('.project-card').classList.add('error')"
+            >
+            <div class="project-overlay">
+                <span class="view-button">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    View Project
+                </span>
+            </div>
+            <div class="project-title">
+                <h3>${project.name}</h3>
+            </div>
+        </div>
+    `;
     
-    title.style.animation = 'titleChange 0.4s ease-out';
-    image.style.animation = 'imageFade 0.5s ease-out';
+    return card;
 }
 
-// Go to specific project
-function goToProject(index) {
-    currentIndex = index;
-    updateGallery(currentIndex);
-    resetAutoPlay();
-}
-
-// Función para actualizar la interfaz
-function updateGallery(index) {
-    const project = urls[index];
-    title.textContent = project.name.toUpperCase();
-    image.src = project.image;
-    image.alt = `Preview de ${project.name}`;
-    link.href = project.url;
-    updateIndicators();
-    triggerAnimations();
-}
-
-// Auto-play functionality
-function startAutoPlay() {
-    stopAutoPlay(); // Clear any existing interval first
-    autoPlayInterval = setInterval(() => {
-        currentIndex++;
-        if (currentIndex >= urls.length) {
-            currentIndex = 0;
-        }
-        updateGallery(currentIndex);
-    }, autoPlayDelay);
-}
-
-function stopAutoPlay() {
-    if (autoPlayInterval) {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
+// Render all projects to the grid
+function renderProjects() {
+    projectsGrid.innerHTML = '';
+    
+    urls.forEach((project, index) => {
+        const card = createProjectCard(project);
+        card.style.animationDelay = `${index * 0.1}s`;
+        projectsGrid.appendChild(card);
+    });
+    
+    // Initialize Lucide icons for the newly created elements
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
     }
 }
 
-function resetAutoPlay() {
-    stopAutoPlay();
-    startAutoPlay();
+// Email button functionality
+const emailButton = document.getElementById('email-button');
+if (emailButton) {
+    emailButton.addEventListener('click', () => {
+        window.location.href = 'mailto:diego@example.com';
+    });
 }
 
-// Eventos de los botones
-nextBtn.addEventListener('click', () => {
-    currentIndex++;
-    if (currentIndex >= urls.length) {
-        currentIndex = 0; // Vuelve al inicio (Loop)
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    renderProjects();
+    
+    // Initialize Lucide icons for the email button
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons({ attrs: { width: 20, height: 20 } });
     }
-    updateGallery(currentIndex);
-    resetAutoPlay();
 });
-
-prevBtn.addEventListener('click', () => {
-    currentIndex--;
-    if (currentIndex < 0) {
-        currentIndex = urls.length - 1; // Vuelve al final
-    }
-    updateGallery(currentIndex);
-    resetAutoPlay();
-});
-
-// Pause auto-play on hover over the gallery card
-document.querySelector('.gallery-card').addEventListener('mouseenter', stopAutoPlay);
-document.querySelector('.gallery-card').addEventListener('mouseleave', startAutoPlay);
-
-// Inicializar la galería al cargar la página
-createIndicators();
-updateGallery(currentIndex);
-startAutoPlay();
-
-// Render lucide icons (replace elements with inline SVGs)
-if (window.lucide && typeof window.lucide.createIcons === 'function') {
-  window.lucide.createIcons({ attrs: { width: 20, height: 20 } });
-}
