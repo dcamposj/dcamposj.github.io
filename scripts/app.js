@@ -1,4 +1,4 @@
-const urls = [
+const codepen_urls = [
   {name: "treemap", url: "https://codepen.io/diego_caji/full/bGPREzy", image: "./resources/treemapdiagram.png"},
   {name: "choropleth", url: "https://codepen.io/diego_caji/full/MWRLyVa", image: "./resources/choropleth.png"},
   {name: "heatmap", url: "https://codepen.io/diego_caji/full/OJGjXMj", image: "./resources/heatmap.png"},
@@ -48,7 +48,7 @@ function createProjectCard(project) {
 function renderProjects() {
     projectsGrid.innerHTML = '';
     
-    urls.forEach((project, index) => {
+    codepen_urls.forEach((project, index) => {
         const card = createProjectCard(project);
         card.style.animationDelay = `${index * 0.1}s`;
         projectsGrid.appendChild(card);
