@@ -63,7 +63,7 @@ function renderProjects() {
 const botton_links = [
     {id: 'email-button', url: 'mailto:diegocj92@gmail.com'},
     {id: 'linkedin-button', url: 'https://www.linkedin.com/in/dcamposj/'},
-    {id: 'github-button', url: 'https://github.com/diego-caji'}
+    {id: 'github-button', url: 'https://github.com/dcamposj'}
 ]
 
 
