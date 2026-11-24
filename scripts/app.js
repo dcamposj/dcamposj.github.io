@@ -1,4 +1,4 @@
-const urls = [
+const codepen_urls = [
   {name: "treemap", url: "https://codepen.io/diego_caji/full/bGPREzy", image: "./resources/treemapdiagram.png"},
   {name: "choropleth", url: "https://codepen.io/diego_caji/full/MWRLyVa", image: "./resources/choropleth.png"},
   {name: "heatmap", url: "https://codepen.io/diego_caji/full/OJGjXMj", image: "./resources/heatmap.png"},
@@ -44,29 +44,37 @@ function createProjectCard(project) {
     return card;
 }
 
-// Render all projects to the grid
+// Render to grid
 function renderProjects() {
     projectsGrid.innerHTML = '';
     
-    urls.forEach((project, index) => {
+    codepen_urls.forEach((project, index) => {
         const card = createProjectCard(project);
         card.style.animationDelay = `${index * 0.1}s`;
         projectsGrid.appendChild(card);
     });
     
-    // Initialize Lucide icons for the newly created elements
+    // Lucide icons 
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
         window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
     }
 }
 
-// Email button functionality
-const emailButton = document.getElementById('email-button');
-if (emailButton) {
-    emailButton.addEventListener('click', () => {
-        window.location.href = 'mailto:diego@example.com';
+const botton_links = [
+    {id: 'email-button', url: 'mailto:diegocj92@gmail.com'},
+    {id: 'linkedin-button', url: 'https://www.linkedin.com/in/dcamposj/'},
+    {id: 'github-button', url: 'https://github.com/dcamposj'}
+]
+
+
+botton_links.forEach(({ id, url }) => {
+  const button = document.getElementById(id);
+  if (button) {
+    button.addEventListener('click', () => {
+      window.location.href = url;
     });
-}
+  }
+});
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
