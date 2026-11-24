@@ -44,7 +44,7 @@ function createProjectCard(project) {
     return card;
 }
 
-// Render all projects to the grid
+// Render to grid
 function renderProjects() {
     projectsGrid.innerHTML = '';
     
@@ -54,19 +54,27 @@ function renderProjects() {
         projectsGrid.appendChild(card);
     });
     
-    // Initialize Lucide icons for the newly created elements
+    // Lucide icons 
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
         window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
     }
 }
 
-// Email button functionality
-const emailButton = document.getElementById('email-button');
-if (emailButton) {
-    emailButton.addEventListener('click', () => {
-        window.location.href = 'mailto:diego@example.com';
+const botton_links = [
+    {id: 'email-button', url: 'mailto:diego@example.com'},
+    {id: 'linkedin-button', url: 'https://www.linkedin.com/in/dcamposj/'},
+    {id: 'github-button', url: 'https://github.com/diego-caji'}
+]
+
+
+botton_links.forEach(({ id, url }) => {
+  const button = document.getElementById(id);
+  if (button) {
+    button.addEventListener('click', () => {
+      window.location.href = url;
     });
-}
+  }
+});
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
